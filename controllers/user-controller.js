@@ -74,8 +74,34 @@ const userController = {
         res.json(dbUserData);
       })
       .catch(err => res.status(400).json(err));
-  }
-}
+  },
 
+//   // createFriend
+//   createFriend({ body }, res) {
+//     User.create(body)
+//       .then(dbUserData => res.json(dbUserData))
+//       .catch(err => res.status(400).json(err));
+//   },
+
+//     // delete Friend
+//     deleteFriend({ params }, res) {
+//         User.findOneAndDelete({ _id: params.id })
+//           //there is also .deleteOne and .deleteMany
+//           .then(dbUserData => {
+//             if (!dbUserData) {
+//               res.status(404).json({ message: 'No User found with this id!' });
+//               return;
+//             }
+//             res.json(dbUserData);
+//           })
+//           .catch(err => res.status(400).json(err));
+//   }
+};
+
+
+router
+.route('/:userId/friends/:friendId')
+.post(createFriend)
+.delete(deleteFriend);
 
 module.exports = userController;
