@@ -19,6 +19,7 @@ const userController = {
 
   // get one User by id
   getUserById({ params }, res) {
+    console.log(params.id);
     User.findOne({ _id: params.userId })
       .populate({
         path: 'thoughts',
@@ -26,8 +27,10 @@ const userController = {
       })
       .select('-__v')
       .then(dbUserData => {
+        
         // If no User is found, send 404
         if (!dbUserData) {
+          
           res.status(404).json({ message: 'No User found with this id!' });
           return;
         }

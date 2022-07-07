@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(require('./routes'));
 
 //tells mongoose which DB to connect to
-mongoose.connect('mongodb://localhost:27017/social-network-API', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/social-network-API', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
