@@ -1,7 +1,7 @@
-const { User, Thought } = require('../models');
+const { User } = require('../models');
 
 const userController = {
-      // get all Users
+      //get all Users
   getAllUser(req, res) {
     User.find({})
       .populate({
@@ -19,7 +19,7 @@ const userController = {
 
   // get one User by id
   getUserById({ params }, res) {
-    User.findOne({ _id: params.id })
+    User.findOne({ _id: params.userId })
       .populate({
         path: 'thoughts',
         select: '-__v'
@@ -48,7 +48,7 @@ const userController = {
 
   // update User by id
   updateUser({ params, body }, res) {
-    User.findOneAndUpdate({ _id: params.id }, body, { new: true, runValidators: true })
+    User.findOneAndUpdate({ _id: params.userId }, body, { new: true, runValidators: true })
       //there is also .updateOne and .updateMany
       // new:true instructs Mongoose to return the new version of the document instead of the original
       //(which would happen if we didn't include this as a third parameter)
@@ -64,7 +64,7 @@ const userController = {
 
   // delete User
   deleteUser({ params }, res) {
-    User.findOneAndDelete({ _id: params.id })
+    User.findOneAndDelete({ _id: params.userId })
       //there is also .deleteOne and .deleteMany
       .then(dbUserData => {
         if (!dbUserData) {
@@ -76,32 +76,25 @@ const userController = {
       .catch(err => res.status(400).json(err));
   },
 
-//   // createFriend
-//   createFriend({ body }, res) {
-//     User.create(body)
-//       .then(dbUserData => res.json(dbUserData))
-//       .catch(err => res.status(400).json(err));
-//   },
+// // //   // createFriend
+// // //   createFriend({ body }, res) {
+// // //     User.create(body)
+// // //       .then(dbUserData => res.json(dbUserData))
+// // //       .catch(err => res.status(400).json(err));
+// // //   },
 
-//     // delete Friend
-//     deleteFriend({ params }, res) {
-//         User.findOneAndDelete({ _id: params.id })
-//           //there is also .deleteOne and .deleteMany
-//           .then(dbUserData => {
-//             if (!dbUserData) {
-//               res.status(404).json({ message: 'No User found with this id!' });
-//               return;
-//             }
-//             res.json(dbUserData);
-//           })
-//           .catch(err => res.status(400).json(err));
-//   }
+// // //     // delete Friend
+// // //     deleteFriend({ params }, res) {
+// // //         User.findOneAndDelete({ _id: params.id })
+// // //           //there is also .deleteOne and .deleteMany
+// // //           .then(dbUserData => {
+// // //             if (!dbUserData) {
+// // //               res.status(404).json({ message: 'No User found with this id!' });
+// // //               return;
+// // //             }
+// // //             res.json(dbUserData);
+// // //           })
+// // //           .catch(err => res.status(400).json(err));
+// // //   }
 };
-
-
-router
-.route('/:userId/friends/:friendId')
-.post(createFriend)
-.delete(deleteFriend);
-
 module.exports = userController;
