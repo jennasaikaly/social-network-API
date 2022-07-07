@@ -26,7 +26,7 @@ const thoughtController = {
       })
       .select('-__v')
       .then(dbThoughtData => {
-        // If no User is found, send 404
+        // If no thought is found, send 404
         if (!dbThoughtData) {
           res.status(404).json({ message: 'No Thought found with this id!' });
           return;
@@ -57,22 +57,21 @@ createThought({ body }, res) {
     })
     .catch(err => res.json(err));
 },
-    
-//   // add reaction to Thought
-//   createReaction({ params, body }, res) {
-//     Thought.findOneAndUpdate({ _id: params.thoughtId }, { $push: { reactions: body } }, { new: true, runValidators: true })
-//       .then(dbUserData => {
-//         // console.log(dbUserData);
-//         if (!dbUserData) {
-//           res.status(404).json({ message: 'No User found with this id!' });
-//           return;
-//         }
-//         res.json(dbUserData);
-//       })
-//       .catch(err => res.json(err));
-//   },
-
-  // remove Thought
+  // update Thought
+  updateThought({ params, body }, res) {
+    console.log(params);
+    console.log(body);
+    Thought.findOneAndUpdate({ _id: params.thoughtId }, body, {new:true, runValidators: true })
+      .then(dbUserData => {
+        if (!dbUserData) {
+          res.status(404).json({ message: 'No Thought found with this id!' });
+          return;
+        }
+        res.json(dbUserData);
+      })
+      .catch(err => res.json(err));
+  },
+      // remove Thought
   deleteThought({ params }, res) {
     Thought.findOneAndDelete({ _id: params.thoughtId })
       .then(deletedThought => {
@@ -94,6 +93,21 @@ createThought({ body }, res) {
       })
       .catch(err => res.json(err));
   },
+//   // add reaction to Thought
+//   createReaction({ params, body }, res) {
+//     Thought.findOneAndUpdate({ _id: params.thoughtId }, { $push: { reactions: body } }, { new: true, runValidators: true })
+//       .then(dbUserData => {
+//         // console.log(dbUserData);
+//         if (!dbUserData) {
+//           res.status(404).json({ message: 'No User found with this id!' });
+//           return;
+//         }
+//         res.json(dbUserData);
+//       })
+//       .catch(err => res.json(err));
+//   },
+
+
 //   // remove reaction
 // deleteReaction({ params }, res) {
 //   Thought.findOneAndUpdate(
