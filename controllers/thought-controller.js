@@ -79,18 +79,18 @@ createThought({ body }, res) {
           return res.status(404).json({ message: 'No thought with this id!' });
         }
         return User.findOneAndUpdate(
-          { _id: params.UserId },
+          { username: deletedThought.username },
           { $pull: { thoughts: params.thoughtId } },
           { new: true }
         );
       })
-      .then(dbUserData => {
-        if (!dbUserData) {
-          res.status(404).json({ message: 'No Thought found with this id!' });
-          return;
-        }
-        res.json(dbUserData);
-      })
+        .then(dbUserData => {
+          if (!dbUserData) {
+            res.status(404).json({ message: 'No Thought found with this id!' });
+            return;
+          }
+          res.json(dbUserData);
+        })
       .catch(err => res.json(err));
   },
   // add reaction to Thought
