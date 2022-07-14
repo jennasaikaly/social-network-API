@@ -70,13 +70,13 @@ const userController = {
       })
       .catch(err => res.status(400).json(err));
   },
-
-// // //   // createFriend
-// // //   createFriend({ body }, res) {
-// // //     User.create(body)
-// // //       .then(dbUserData => res.json(dbUserData))
-// // //       .catch(err => res.status(400).json(err));
-// // //   },
+  //.route('/:userId/friends/:friendId')
+  // createFriend
+  createFriend({ body }, res) {
+    User.create(body)
+      .then(dbUserData => res.json(dbUserData))
+      .catch(err => res.status(400).json(err));
+  },
 
 // // //     // delete Friend
 // // //     deleteFriend({ params }, res) {
