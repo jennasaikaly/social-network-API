@@ -75,6 +75,8 @@ createThought({ body }, res) {
   deleteThought({ params }, res) {
     Thought.findOneAndDelete({ _id: params.thoughtId })
       .then(deletedThought => {
+        console.log(params);
+        console.log(deletedThought);
         if (!deletedThought) {
           return res.status(404).json({ message: 'No thought with this id!' });
         }
@@ -85,6 +87,7 @@ createThought({ body }, res) {
         );
       })
         .then(dbUserData => {
+          console.log(dbUserData);
           if (!dbUserData) {
             res.status(404).json({ message: 'No Thought found with this id!' });
             return;
@@ -115,7 +118,14 @@ deleteReaction({ params }, res) {
     { $pull: { reactions: { reactionId: params.reactionId } } },
     { new: true }
   )
-    .then(dbUserData => res.json(dbUserData))
+  .then(dbUserData => {
+    // console.log(dbUserData);
+    if (!dbUserData) {
+      res.status(404).json({ message: 'No Thought found with this id!' });
+      return;
+    }
+    res.json(dbUserData);
+  })
     .catch(err => res.json(err));
 }
 };
