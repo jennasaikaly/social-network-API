@@ -3,7 +3,7 @@
 
   ## Description
 
-  This project was the challenge for Module 18: NoSQL.  I had to create an API that uses a NoSQL Database to be used by a social network web application.I used Express.js and Mongoose to build this project.
+  This project was the challenge for Module 18: NoSQL.  I had to create an API that uses a NoSQL Database to be used by a social network web application.  I used Express.js and Mongoose to build this project.
 
   
 
