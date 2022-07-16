@@ -12,7 +12,7 @@
   * [Installation](#installation)
   * [Usage](#usage)
   * [Link](#link) 
-  * [Screenshot](#screenshot)
+  * [Walkthrough](#walkthrough)
    
   
   ## Installation
@@ -27,9 +27,9 @@
 
   This site is not currently deployed.
 
-  ## Screenshot
+  ## Walkthrough
 
-  yes
+  <a href="https://drive.google.com/file/d/1gzP3WGf0IXbdyKdrHBw266A19k1bOVIO/view" target="_blank">Walkthrough Video</a><br/>
   
   ## Questions
 
